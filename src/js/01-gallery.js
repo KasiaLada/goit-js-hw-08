@@ -1,5 +1,25 @@
+import SimpleLightbox from '../simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 // Add imports above this line
-import { galleryItems } from './gallery-items';
-// Change code below this line
+import { galleryItems } from './gallery-items.js'; //
 
-console.log(galleryItems);
+const gallery = document.querySelector('.gallery');
+
+let galleryList = '';
+
+galleryItems.forEach(image => {
+  galleryList += `
+    <li>
+        <a href="${image.original}" class="gallery__item">
+            <img class="gallery__image" src="${image.preview}" alt="${image.description}">
+        </a>
+    </li>`;
+});
+
+gallery.innerHTML = galleryList;
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
