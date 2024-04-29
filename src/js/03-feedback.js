@@ -9,7 +9,7 @@ const formData = {
 
 // Funkcja do zapisywania stanu formularza w localStorage
 const saveFormData = () => {
-  localStorage.setItem(feedbackFormData, JSON.stringify(formData));
+  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 };
 
 // Opóźnienie funkcji zapisującej dane do local storage
@@ -17,7 +17,7 @@ const throttledSaveFormData = throttle(saveFormData, 500);
 
 // Ustawienie wartości formularza przy ładowaniu strony
 const populateForm = () => {
-  const savedData = localStorage.getItem(feedbackFormData);
+  const savedData = localStorage.getItem('feedback-form-state');
   if (savedData) {
     const parsedData = JSON.parse(savedData);
     form.elements.email.value = parsedData.email || '';
@@ -38,7 +38,7 @@ form.addEventListener('submit', ev => {
     email: form.elements.email.value,
     message: form.elements.message.value,
   });
-  localStorage.removeItem(feedbackFormData);
+  localStorage.removeItem('feedback-form-state');
   form.reset();
 });
 
